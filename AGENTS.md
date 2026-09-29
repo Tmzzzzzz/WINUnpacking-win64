@@ -34,9 +34,11 @@ build.bat clean     :: 清 build\ 与 %TEMP% 下的 PyInstaller 残留
 
 1. **改动后只跑 pytest，不要随手打包 exe。**
    一次 PyInstaller 打包 ≈ 3 分钟 + 150 MB 中间产物。确认功能全部做完再出成品。
-2. **验证打包版 GUI「窗口能否打开」时，不要 `terminate()` / `kill()`。**
-   强杀不会触发 PyInstaller onefile 的临时目录清理，每次泄漏约 113 MB 到
-   `%TEMP%\_MEI*`。正确做法：找到窗口后 `PostMessageW(hwnd, WM_CLOSE, 0, 0)` 正常关窗。
+2. **验证打包版 GUI「窗口能否打开」时，用 `PostMessageW(hwnd, WM_CLOSE, 0, 0)` 正常关窗，
+   不要 `terminate()` / `kill()`。**
+   强杀**一定**不清理；但实测**正常关窗也可能残留**约 113 MB 的 `%TEMP%\_MEI*` ——
+   PyInstaller onefile 在 Windows 上删除临时目录时常因 DLL 仍被映射而失败。
+   所以验证脚本收尾要顺手清理 `_MEI*`，别假设它会自己消失。
 3. **`build.bat` / `Start.bat` 必须保持 GBK(cp936) 编码 + CRLF 行尾。**
    详见第 5 节。改这两个文件后必须自检编码与行尾。
 4. **测试不引入二进制夹具。** 样本一律在 `tests/samples.py` 里用代码构造
@@ -134,7 +136,16 @@ raw.count(b'\r\n') == raw.count(b'\n')     # 全 CRLF
 
 ### PyInstaller
 
-- `--onefile` 运行时会自解包到 `%TEMP%\_MEI*`（约 113 MB）；**强杀不清理**（见硬性规则 2）。
+- `--onefile` 运行时会自解包到 `%TEMP%\_MEI*`（约 113 MB）；强杀一定不清理，
+  正常退出也可能失败（见硬性规则 2）。
+- **`--add-data` / `--icon` 的相对路径按 spec 文件目录解析**：`--specpath build\gui` 时
+  写 `tools\icon\app.ico` 会被解析成 `build\gui\tools\icon\app.ico` → 报
+  `Unable to find ... when adding binary and data files`。必须用绝对路径
+  （本仓库写作 `"%CD%\tools\icon\app.ico"`）。
+- **多行命令的 `^` 必须在行尾**：多写一个字符（如 `^1`）会让 `^` 转义它、续行失效，
+  后续参数被当成独立命令执行（实测报 `Script file '1' does not exist` +
+  `'--noconfirm' 不是内部或外部命令`）。**`build.bat check` 走不到打包命令，
+  只有真跑一次构建才暴露** —— 已由 `tests/test_scripts.py` 静态钉住这类问题。
 - 构建失败时若直接 `exit`，`build\`（约 150 MB）会留下 → 失败路径必须走统一的清理分支。
 - 惰性 import 的第三方库要显式 `--hidden-import` / `--collect-submodules`，
   否则运行时报 `ModuleNotFoundError`。

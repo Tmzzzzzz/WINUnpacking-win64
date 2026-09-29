@@ -75,10 +75,10 @@ if exist release rmdir /s /q release
 mkdir release
 
 echo [2/5] 编译图形界面版（GUI 子系统：双击不会弹出终端）...
-call "%PYEXE%" -m PyInstaller ^1
+call "%PYEXE%" -m PyInstaller ^
   --noconfirm --clean --onefile --windowed ^
-  --icon tools\icon\app.ico ^
-  --add-data "tools/icon/app-icon-256.png;." ^
+  --icon "%CD%\tools\icon\app.ico" ^
+  --add-data "%CD%\tools\icon\app-icon-256.png;." ^
   --name WinUnpack ^
   --distpath release ^
   --workpath build\gui --specpath build\gui ^
@@ -104,7 +104,7 @@ if errorlevel 1 (
 echo [3/5] 编译命令行版（控制台子系统：CLI 输出与退出码完整，体积更小）...
 call "%PYEXE%" -m PyInstaller ^
   --noconfirm --clean --onefile --console ^
-  --icon tools\icon\app.ico ^
+  --icon "%CD%\tools\icon\app.ico" ^
   --name WinUnpack-CLI ^
   --distpath release ^
   --workpath build\cli --specpath build\cli ^
