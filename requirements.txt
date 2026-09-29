@@ -1,0 +1,13 @@
+# 运行 GUI 必需
+PySide6>=6.6
+
+# 解包能力依赖
+py7zr>=0.21            # 7-Zip (.7z) 读写，含 AES 加密支持
+pycryptodomex>=3.19    # py7zr 的加密后端
+rarfile>=4.1           # RAR 读取（需系统 unrar/bsdtar，否则自动转外部 7-Zip）
+zstandard>=0.22        # Zstd 单流解压
+olefile>=0.47          # MSI/OLE 复合文档流枚举
+dnfile>=0.15           # 托管 .NET 程序集解析（提取内嵌资源与结构信息）
+
+# 可选：打包成单文件 exe
+# pyinstaller>=6.3

@@ -1,0 +1,46 @@
+MIT License
+
+Copyright (c) 2011-2025 AlphaSierraPapa for the ILSpy project
+(ILSpy — https://github.com/icsharpcode/ILSpy/)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+本目录随附的第三方组件（均为各自项目的 MIT / Apache-2.0 许可）：
+
+  ICSharpCode.Decompiler / ICSharpCode.ILSpyX / ilspycmd
+      MIT License — Copyright (c) 2011-2025 AlphaSierraPapa
+  Mono.Cecil / Mono.Cecil.Mdb / Mono.Cecil.Pdb / Mono.Cecil.Rocks
+      MIT License — Copyright (c) 2008 - 2015 Jb Evain
+  Newtonsoft.Json
+      MIT License — Copyright (c) 2007 James Newton-King
+  K4os.Compression.LZ4
+      MIT License — Copyright (c) 2015-2020 Milosz Krajewski
+  McMaster.Extensions.CommandLineUtils / McMaster.Extensions.Hosting.CommandLine
+      Apache-2.0 License — Copyright (c) Nate McMaster
+  NuGet.Common / NuGet.Configuration / NuGet.Frameworks / NuGet.Packaging /
+  NuGet.Protocol / NuGet.Versioning
+      Apache-2.0 License — Copyright (c) .NET Foundation
+  Microsoft.Extensions.*
+      MIT License — Copyright (c) .NET Foundation and Contributors
+  System.Collections.Immutable / System.Composition.AttributedModel /
+  System.Diagnostics.EventLog / System.Reflection.Metadata /
+  System.Security.Cryptography.Pkcs / System.Security.Cryptography.ProtectedData
+      MIT License — Copyright (c) .NET Foundation and Contributors
