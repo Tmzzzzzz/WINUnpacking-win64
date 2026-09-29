@@ -172,10 +172,9 @@ WinUnpack-CLI.exe legacy.zip --encoding gbk
 - **ISO 镜像**：仅支持 ISO9660（Joliet / Rock Ridge），不支持 UDF。
 - **7z 的非覆盖策略**：需先解到暂存目录再按规则归位，会额外占用一份临时磁盘空间。
 - 外部 7-Zip 路径可用环境变量 `SEVENZIP_PATH` 指定。
-- **临时空间**：单文件 exe 每次启动会把自己解包到 `%TEMP%\_MEIxxxxx`（约 110 MB）。
-  退出时本应自动删除，但**实测正常关闭也可能残留** —— PyInstaller onefile 在 Windows 上
-  删除临时目录时会因 DLL 仍被占用而失败。长期使用会逐渐累积，可手动清理
-  （先关掉所有正在运行的 WinUnpack）。
+- **临时空间**：单文件 exe 每次启动会把自己解包到 `%TEMP%\_MEIxxxxx`（约 110 MB），
+  正常退出时自动删除；若被任务管理器**强杀**或崩溃，该目录会滞留占空间 ——
+  可手动清理（先关掉所有正在运行的 WinUnpack）。
 
 ---
 
